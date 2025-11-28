@@ -46,14 +46,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          sudo pip install -r requirements.txt -break-system-pakages
 
       - name: Run L7 Ping Test
         if: github.event.inputs.layer == 'L7'
         run: |
-          python3 start.py ${{ github.event.inputs.method }} '${{ github.event.inputs.target }}' 0 ${{ github.event.inputs.threads }} "http.txt" ${{ github.event.inputs.rpc }} ${{ github.event.inputs.duration }}
+          sudo python3 start.py ${{ github.event.inputs.method }} '${{ github.event.inputs.target }}' 0 ${{ github.event.inputs.threads }} "http.txt" ${{ github.event.inputs.rpc }} ${{ github.event.inputs.duration }}
 
       - name: Run L4 Ping Test
         if: github.event.inputs.layer == 'L4'
         run: |
-          python3 start.py ${{ github.event.inputs.method }} ${{ github.event.inputs.target }} ${{ github.event.inputs.threads }} ${{ github.event.inputs.duration }}
+          sudo python3 start.py ${{ github.event.inputs.method }} ${{ github.event.inputs.target }} ${{ github.event.inputs.threads }} ${{ github.event.inputs.duration }}
